@@ -31,22 +31,27 @@ def pagination(mode):
         @functools.wraps(method)
         def wrapper(*args, **kwargs):
             return method(*args, **kwargs)
+
         wrapper.pagination_mode = mode
         return wrapper
+
     return decorator
 
 
 def payload(payload_type, **payload_kwargs):
     payload_list = payload_kwargs.get('list', False)
+
     def decorator(method):
         @functools.wraps(method)
         def wrapper(*args, **kwargs):
             kwargs['payload_list'] = payload_list
             kwargs['payload_type'] = payload_type
             return method(*args, **kwargs)
+
         wrapper.payload_list = payload_list
         wrapper.payload_type = payload_type
         return wrapper
+
     return decorator
 
 
@@ -100,10 +105,10 @@ class API:
     """
 
     def __init__(
-        self, auth=None, *, cache=None, host='api.twitter.com', parser=None,
-        proxy=None, retry_count=0, retry_delay=0, retry_errors=None,
-        timeout=60, upload_host='upload.twitter.com', user_agent=None,
-        wait_on_rate_limit=False
+            self, auth=None, *, cache=None, host='api.twitter.com', parser=None,
+            proxy=None, retry_count=0, retry_delay=0, retry_errors=None,
+            timeout=60, upload_host='upload.twitter.com', user_agent=None,
+            wait_on_rate_limit=False
     ):
         self.auth = auth
         self.cache = cache
@@ -145,10 +150,10 @@ class API:
         self.session = requests.Session()
 
     def request(
-        self, method, endpoint, *, endpoint_parameters=(), params=None,
-        headers=None, json_payload=None, parser=None, payload_list=False,
-        payload_type=None, post_data=None, files=None, require_auth=True,
-        return_cursors=False, upload_api=False, use_cache=True, **kwargs
+            self, method, endpoint, *, endpoint_parameters=(), params=None,
+            headers=None, json_payload=None, parser=None, payload_list=False,
+            payload_type=None, post_data=None, files=None, require_auth=True,
+            return_cursors=False, upload_api=False, use_cache=True, **kwargs
     ):
         # If authentication is required and no credentials
         # are provided, throw an error.
@@ -174,7 +179,7 @@ class API:
             if arg is None:
                 continue
             if k not in endpoint_parameters + (
-                "include_ext_edit_control", "tweet_mode"
+                    "include_ext_edit_control", "tweet_mode"
             ):
                 log.warning(f'Unexpected parameter: {k}')
             params[k] = str(arg)
@@ -210,8 +215,8 @@ class API:
             retries_performed = 0
             while retries_performed <= self.retry_count:
                 if (self.wait_on_rate_limit and reset_time is not None
-                    and remaining_calls is not None
-                    and remaining_calls < 1):
+                        and remaining_calls is not None
+                        and remaining_calls < 1):
                     # Handle running out of API calls
                     sleep_time = reset_time - int(time.time())
                     if sleep_time > 0:
@@ -322,7 +327,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -358,7 +363,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -405,7 +410,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -449,7 +454,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -497,7 +502,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -627,7 +632,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -659,7 +664,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -700,7 +705,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -745,7 +750,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -778,7 +783,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -806,7 +811,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -840,7 +845,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -876,7 +881,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -914,7 +919,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -1021,7 +1026,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -1090,7 +1095,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Status`
+        :py:class:`~tweepy.models.Status`
 
         References
         ----------
@@ -1207,7 +1212,7 @@ class API:
 
         Returns
         -------
-        :class:`SearchResults`
+        :py:class:`SearchResults`
 
         References
         ----------
@@ -1260,7 +1265,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1304,7 +1309,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -1355,7 +1360,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -1399,7 +1404,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1435,7 +1440,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1467,7 +1472,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1517,7 +1522,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -1565,7 +1570,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -1616,7 +1621,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -1653,7 +1658,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1683,7 +1688,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1715,7 +1720,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1752,7 +1757,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1793,7 +1798,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1835,7 +1840,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1876,7 +1881,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1912,7 +1917,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1943,7 +1948,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -1982,7 +1987,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`~tweepy.models.List`
 
         References
         ----------
@@ -2024,7 +2029,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -2065,7 +2070,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2105,7 +2110,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -2146,7 +2151,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2179,7 +2184,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -2207,7 +2212,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Relationship`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Relationship`]
 
         References
         ----------
@@ -2234,7 +2239,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -2266,7 +2271,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -2301,7 +2306,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Friendship`
+        :py:class:`~tweepy.models.Friendship`
 
         References
         ----------
@@ -2347,7 +2352,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2388,7 +2393,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2421,7 +2426,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -2451,7 +2456,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -2478,7 +2483,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -2509,7 +2514,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Friendship`
+        :py:class:`~tweepy.models.Friendship`
 
         References
         ----------
@@ -2566,7 +2571,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -2591,7 +2596,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.SavedSearch`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.SavedSearch`]
 
         References
         ----------
@@ -2613,7 +2618,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.SavedSearch`
+        :py:class:`~tweepy.models.SavedSearch`
 
         References
         ----------
@@ -2751,7 +2756,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -2829,7 +2834,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -2858,7 +2863,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.SavedSearch`
+        :py:class:`~tweepy.models.SavedSearch`
 
         References
         ----------
@@ -2884,7 +2889,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.SavedSearch`
+        :py:class:`~tweepy.models.SavedSearch`
 
         References
         ----------
@@ -2914,7 +2919,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -2948,7 +2953,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2979,7 +2984,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`~typing.List`[:py:class:`int`]
 
         References
         ----------
@@ -3012,7 +3017,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -3046,7 +3051,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -3079,7 +3084,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -3107,7 +3112,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -3135,7 +3140,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -3165,7 +3170,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.User`
+        :py:class:`~tweepy.models.User`
 
         References
         ----------
@@ -3226,7 +3231,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.DirectMessage`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.DirectMessage`]
 
         References
         ----------
@@ -3251,7 +3256,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.DirectMessage`
+        :py:class:`~tweepy.models.DirectMessage`
 
         References
         ----------
@@ -3265,8 +3270,8 @@ class API:
 
     @payload('direct_message')
     def send_direct_message(
-        self, recipient_id, text, *, quick_reply_options=None,
-        attachment_type=None, attachment_media_id=None, ctas=None, **kwargs
+            self, recipient_id, text, *, quick_reply_options=None,
+            attachment_type=None, attachment_media_id=None, ctas=None, **kwargs
     ):
         """send_direct_message(recipient_id, text, *, quick_reply_options, \
                                attachment_type, attachment_media_id, ctas)
@@ -3292,7 +3297,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.DirectMessage`
+        :py:class:`~tweepy.models.DirectMessage`
 
         References
         ----------
@@ -3304,7 +3309,7 @@ class API:
                           'target': {'recipient_id': recipient_id},
                           'message_data': {'text': text}
                       }
-            }
+                      }
         }
         message_data = json_payload['event']['message_create']['message_data']
         if quick_reply_options is not None:
@@ -3394,7 +3399,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Media`
+        :py:class:`~tweepy.models.Media`
 
         References
         ----------
@@ -3462,7 +3467,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Media`
+        :py:class:`~tweepy.models.Media`
 
         References
         ----------
@@ -3512,7 +3517,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Media`
+        :py:class:`~tweepy.models.Media`
 
         References
         ----------
@@ -3567,7 +3572,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Media`
+        :py:class:`~tweepy.models.Media`
 
         References
         ----------
@@ -3604,13 +3609,13 @@ class API:
             )
 
         fp.close()
-        media =  self.chunked_upload_finalize(media_id, **kwargs)
+        media = self.chunked_upload_finalize(media_id, **kwargs)
 
         if wait_for_async_finalize and hasattr(media, 'processing_info'):
             while (
-                media.processing_info['state'] in (
+                    media.processing_info['state'] in (
                     'pending', 'in_progress'
-                ) and 'error' not in media.processing_info
+            ) and 'error' not in media.processing_info
             ):
                 time.sleep(media.processing_info['check_after_secs'])
                 media = self.get_media_upload_status(media.media_id, **kwargs)
@@ -3665,7 +3670,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Media`
+        :py:class:`~tweepy.models.Media`
 
         References
         ----------
@@ -3703,7 +3708,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Media`
+        :py:class:`~tweepy.models.Media`
 
         References
         ----------
@@ -3859,7 +3864,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.Place`
+        :py:class:`~tweepy.models.Place`
 
         References
         ----------
@@ -3898,7 +3903,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Place`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Place`]
 
         References
         ----------
@@ -3977,7 +3982,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Place`]
+        :py:class:`~typing.List`[:py:class:`~tweepy.models.Place`]
 
         References
         ----------
