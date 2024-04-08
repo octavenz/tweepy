@@ -1052,10 +1052,8 @@ class API:
     @payload('status')
     def update_status_with_media(self, status, filename, *, file=None,
                                  **kwargs):
-        """update_status_with_media( \
-            status, filename, *, file, possibly_sensitive, \
-            in_reply_to_status_id, lat, long, place_id, display_coordinates \
-        )
+        """update_status_with_media(status, filename, *, file, possibly_sensitive, in_reply_to_status_id, lat, long, place_id, display_coordinates)
+
 
         Update the authenticated user's status. Statuses that are duplicates or
         too long will be silently ignored.
@@ -1123,8 +1121,7 @@ class API:
     @pagination(mode='id')
     @payload('search_results')
     def search_tweets(self, q, **kwargs):
-        """search_tweets(q, *, geocode, lang, locale, result_type, count, \
-                         until, since_id, max_id, include_entities)
+        """search_tweets(q, *, geocode, lang, locale, result_type, count, until, since_id, max_id, include_entities)
 
         Returns a collection of relevant Tweets matching a specified query.
 
