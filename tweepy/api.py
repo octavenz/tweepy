@@ -1148,7 +1148,6 @@ class API:
             find across the REST API and platform. However, perspectival
             attributes (fields that pertain to the perspective of the
             authenticating user) are not currently supported on this endpoint.
-            [#]_\ [#]_
 
         .. deprecated:: 4.15.0
             `The Twitter API v1.1 search/tweets endpoint that this method uses
