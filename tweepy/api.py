@@ -1069,27 +1069,27 @@ class API:
 
         Parameters
         ----------
-        status
+        status : str
             The text of your status update.
-        filename
-            |filename|
-        file
-            |file|
-        possibly_sensitive
-            Set to true for content which may not be suitable for every
-            audience.
-        in_reply_to_status_id
+        filename : str
+            The name of the file to be uploaded as media.
+        file : file-like object, optional
+            The file object representing the media content. If provided, `filename`
+            will be ignored.
+        possibly_sensitive : bool, optional
+            Set to True for content which may not be suitable for every audience.
+        in_reply_to_status_id : int, optional
             The ID of an existing status that the update is in reply to.
-        lat
+        lat : float, optional
             The location's latitude that this tweet refers to.
-        long
+        long : float, optional
             The location's longitude that this tweet refers to.
-        place_id
-            Twitter ID of location which is listed in the Tweet if geolocation
+        place_id : str, optional
+            Twitter ID of the location which is listed in the Tweet if geolocation
             is enabled for the user.
-        display_coordinates
-            Whether or not to put a pin on the exact coordinates a Tweet has
-            been sent from.
+        display_coordinates : bool, optional
+            Whether or not to put a pin on the exact coordinates a Tweet has been
+            sent from.
 
         Returns
         -------
