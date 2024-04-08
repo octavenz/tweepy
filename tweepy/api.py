@@ -1191,7 +1191,7 @@ class API:
             * recent : return only the most recent results in the response
             * popular : return only the most popular results in the response
         count
-            |count|
+            Maximum number of tweets to return per page. Defaults to 15.
         until
             Returns tweets created before the given date. Date should be
             formatted as YYYY-MM-DD. Keep in mind that the search index has a
